@@ -8,7 +8,7 @@ e principalmente atender os objetivos abaixo:
 ..* Conservar dados íntegros sobre livros cadastrados e usuários relacionados.
 ..* Possuir design não complexo e contemplando acessibilidade.
 
-## Histórias de Usuário
+## Requisitos Funcionais
 
 **RF001** - O sistema deve permitir que o usuário cadastre seus dados pessoais
 
