@@ -10,8 +10,8 @@ e principalmente atender os objetivos abaixo:
 
 ## Histórias de Usuário
 
-1. **SENDO** usuário **EU QUERO** cadastrar meus dados pessoais
+**RF001** - O sistema deve permitir que o usuário cadastre seus dados pessoais
 
-2. **SENDO** usuário **EU QUERO** cadastrar um livro que possuo **PORQUE** desejo disponibilizá-lo para trocas
+**RF002** - O sistema deve permitir que o usuário cadastre um livro que deseja disponibilizar para troca
 
-3. **SENDO** usuário **EU QUERO** poder escolher gêneros e autores favoritos, **PORQUE** desejo filtrar o que será apresentado a mim.
+**RF003** - O sistema deve permitir que o usuário escolha gêneros literários favoritos
