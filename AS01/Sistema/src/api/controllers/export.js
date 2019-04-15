@@ -1,5 +1,4 @@
 const fs = require('fs');
-const XLS = require('xlsx')
 
 const codLength = 7;
 const titleLength = 30;
@@ -22,61 +21,64 @@ module.exports.exportBooks = () => {
 }
 
 function getText(books) {
-    const xlsReader = require('xlsx')
-    let xls = xlsReader.readFile('Book1.xlsx');
     let text = '';
     for(let book of books) {
-        if(book.cod > codLength)
-            book.cod = book.cod.slice(0, codLength)
+        book.Cod = book.Cod.toString()
+        book.Autor = book.Autor.toString()
+        book.Titulo = book.Titulo.toString()
+        book.Editora = book.Editora.toString()
+        book.Qtd = book.Qtd.toString()
+        if(book.Cod.length > codLength)
+            book.Cod = book.cod.slice(0, codLength)
         
-        text += book.cod;
+        text += book.Cod;
 
-        if(book.cod < codLength) {
-            for(let i = 0; i < codLength - book.cod; i++){
+        if(book.Cod.length < codLength) {
+            for(let i = 0; i < codLength - book.Cod; i++){
                 text += ' ';
             }
         }
 
-        if(book.title > titleLength)
-            book.title = book.title.slice(0, titleLength)
+        if(book.Titulo.length > titleLength)
+            book.Titulo = book.Titulo.slice(0, titleLength)
         
-        text += book.title;
+        text += book.Titulo;
 
-        if(book.title < titleLength) {
-            for(let i = 0; i < titleLength - book.title; i++){
+        if(book.Titulo.length < titleLength) {
+            for(let i = 0; i < titleLength - book.Titulo; i++){
                 text += ' ';
             }
         }
 
-        if(book.edit > editLength)
-            book.edit = book.cod.slice(0, editLength)
+        if(book.Editora.length > editLength)
+            book.Editora = book.cod.slice(0, editLength)
         
-        text += book.edit;
+        text += book.Editora;
 
-        if(book.edit < editLength) {
-            for(let i = 0; i < editLength - book.edit; i++){
+        if(book.Editora.length < editLength) {
+            for(let i = 0; i < editLength - book.Editora; i++){
                 text += ' ';
             }
         }
 
-        if(book.autor > autorLength)
-            book.autor = book.autor.slice(0, autorLength)
+        if(book.Autor.length > autorLength)
+            book.Autor.length = book.Autor.slice(0, autorLength)
         
-        text += book.autor;
+        text += book.Autor;
 
-        if(book.autor < autorLength) {
-            for(let i = 0; i < autorLength - book.autor; i++){
+        if(book.Autor.length < autorLength) {
+            for(let i = 0; i < autorLength - book.Autor; i++){
                 text += ' ';
             }
         }
 
-        if(book.qtd > qtdLength)
-            book.qtd = book.qtd.slice(0, qtdLength)
+        if(book.Qtd.length > qtdLength)
+            book.Qtd = book.Qtd.slice(0, qtdLength)
         
-        text += book.qtd;
+        text += book.Qtd;
 
-        if(book.qtd < qtdLength) {
-            for(let i = 0; i < qtdLength - book.qtd; i++){
+        if(book.Qtd.length < qtdLength) {
+            for(let i = 0; i < qtdLength - book.Qtd; i++){
                 text += ' ';
             }
         }
@@ -86,6 +88,8 @@ function getText(books) {
 }
 
 function getBooks() {
-    let books = XLS.readFile("Book1.xlsx");
-    return books;
+    let XLS = require('xlsx')
+    let books = XLS.readFile("/home/vstillo/Documentos/ES/Integracao/IApl-2019-1-ThndrBks/AS01/Sistema/src/api/controllers/Book1.xlsx").Sheets
+    books =  XLS.utils.sheet_to_json(books.Sheet1)
+    return books
 }
