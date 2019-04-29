@@ -1,4 +1,4 @@
-1      Harry Potter e a pedra filosofRoccoJ.K. Rowling3 
-2     Lean StartupCrown PublishingEric Ries1   
-3    Código LimpoAlta BooksRobert Cecil Martin2  
-4   Node.jsCasa do CódigoCaio Ribeiro Pereira12
+1 Harry Potter e a pedra filosofRoccoJ.K. Rowling3 
+2 Lean StartupCrown PublishingEric Ries1   
+3 Código LimpoAlta BooksRobert Cecil Martin2  
+4 Node.jsCasa do CódigoCaio Ribeiro Pereira12

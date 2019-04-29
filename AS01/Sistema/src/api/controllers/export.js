@@ -89,7 +89,7 @@ function getText(books) {
 
 function getBooks() {
     let XLS = require('xlsx')
-    let books = XLS.readFile("/home/vstillo/Documentos/ES/Integracao/IApl-2019-1-ThndrBks/AS01/Sistema/src/api/controllers/Book1.xlsx").Sheets
+    let books = XLS.readFile("/home/edionay/github/IApl-2019-1-ThndrBks/AS01/Sistema/src/api/controllers/Book1.xlsx").Sheets
     books =  XLS.utils.sheet_to_json(books.Sheet1)
     return books
 }
