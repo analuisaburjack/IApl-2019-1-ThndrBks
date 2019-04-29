@@ -9,10 +9,10 @@ const qtdLength = 4;
 module.exports.exportBooks = () => {
     let books = getBooks();
 
-    let text = getText(books)
+    let text = JSON.stringify(books);
     
 
-    fs.writeFile('books.txt', text, 'utf8', function(err) {
+    fs.writeFile('booksExport.json', text, 'utf8', function(err) {
         console.log('passing');
         if(err)
             console.error(err.message)
@@ -81,8 +81,6 @@ function getText(books) {
 }
 
 function getBooks() {
-    let XLS = require('xlsx')
-    let books = XLS.readFile("/home/vstillo/Documentos/ES/Integracao/IApl-2019-1-ThndrBks/AS01/Sistema/src/api/controllers/Book1.xlsx").Sheets
-    books =  XLS.utils.sheet_to_json(books.Sheet1)
+    let books = require('./books.json')
     return books
 }
