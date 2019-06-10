@@ -1,4 +1,0 @@
-1 Harry Potter e a pedra filosofRocco                         J.K. Rowling                  3   
-2 Lean Startup                  Crown Publishing              Eric Ries                     1   
-3 Código Limpo                  Alta Books                    Robert Cecil Martin           2   
-4 Node.js                       Casa do Código                Caio Ribeiro Pereira          12  
