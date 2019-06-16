@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Abel');
+html,
+body {
+    background-image: url('./../assets/background.png');
+    font-family: Abel, Arial, Verdana, sans-serif;
+}
+
+.container {
+    margin-left: 230px;
+}
+
+.pergaminho {
+    background-image: url('./../assets/letras.png');
+    background-size: 100%;
+    background-repeat: repeat
+}
+
+h1 {
+    font-family: 'Antique Book Cover'
+}
+
+.title {
+    color: #660000;
+}
+
+@font-face {
+    font-family: 'Antique Book Cover';
+    src: url('./../assets/fonts/Antique.otf') format("opentype");
+}

@@ -9,13 +9,18 @@ module.exports.getBook = async function(bookId) {
 }
 
 module.exports.createBook = async function(book) {
-    if(isValid(book)) {
-        return await bookRepository.createOne(book)
+    try {
+        book.release = new Date(book.release)
+        if (isValid(book)) {
+            return await bookRepository.createOne(book)
+        }
+    } catch (error) {
+        console.log(error.message)
     }
 }
 
 module.exports.updateBook = async function(book) {
-    if(isValid(book)) {
+    if (isValid(book)) {
         return await bookRepository.updateOne(book)
     }
 }
