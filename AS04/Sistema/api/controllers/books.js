@@ -9,13 +9,18 @@ module.exports.getBook = async function(bookId) {
 }
 
 module.exports.createBook = async function(book) {
-    if(isValid(book)) {
-        return await bookRepository.createOne(book)
+    try {
+        book.release = new Date(book.release)
+        if (isValid(book)) {
+            return await bookRepository.createOne(book)
+        }
+    } catch (error) {
+        console.log(error.message)
     }
 }
 
 module.exports.updateBook = async function(book) {
-    if(isValid(book)) {
+    if (isValid(book)) {
         return await bookRepository.updateOne(book)
     }
 }
@@ -25,15 +30,15 @@ module.exports.removeBook = async function(bookId) {
     return await bookRepository.getAll()
 }
 
-function isValid({title, isbn, author, genre}) {
-    if(!title)
-        throw { code: 400, message: `Invalid title`}
-    if(!isbn)
-        throw { code: 400, message: `Invalid isbn`}
-    if(!author)
-        throw { code: 400, message: `Invalid author`}
-    if(!genre || genre !== 'Romance' || genre !==  'Adventure' || genre !==  'Fantasy' || 
-        genre !==  'Thriller' || genre !==  'Mistery')
-        throw { code: 400, message: `Invalid genre`}
+function isValid({ title, isbn, author, genre }) {
+    if (!title)
+        throw { code: 400, message: `Invalid title` }
+    if (!isbn)
+        throw { code: 400, message: `Invalid isbn` }
+    if (!author)
+        throw { code: 400, message: `Invalid author` }
+    if (!genre || genre !== 'Romance' || genre !== 'Adventure' || genre !== 'Fantasy' ||
+        genre !== 'Thriller' || genre !== 'Mistery')
+        throw { code: 400, message: `Invalid genre` }
     return true
 }
