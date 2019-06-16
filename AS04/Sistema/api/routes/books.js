@@ -28,7 +28,7 @@ async function getBooks(req, res) {
 async function createBook(req, res) {
     try {
         const book = req.body
-        res.status(201).send({ success: true, book: bookController.createBook(book) })
+        res.status(201).send({ success: true, book: await bookController.createBook(book) })
     } catch(e) {
         res.status(500).send({ success: false, message: `Falha ao cadastrar livro: ${e.message}`})
     }
@@ -37,7 +37,7 @@ async function createBook(req, res) {
 async function getBook(req, res) {
     try {
         const bookId = req.params.id
-        res.status(200).send({ success: true, book: bookController.getBook(bookId) })
+        res.status(200).send({ success: true, book: await bookController.getBook(bookId) })
     } catch (e) {
         res.status(404).send({ success: false, message: `Livro ${req.params.id} não encontrado.`})
     }
@@ -46,7 +46,7 @@ async function getBook(req, res) {
 async function updateBook(req, res) {
     try {
         const book = req.body
-        res.status(201).send({ success: true, book: bookController.updateBook(book) })
+        res.status(201).send({ success: true, book: await bookController.updateBook(book) })
     } catch(e) {
         res.status(500).send({ success: false, message: `Não foi possível atualizar o livro` })
     }
@@ -55,7 +55,7 @@ async function updateBook(req, res) {
 async function removeBook(req, res) {
     try {
         const bookId = req.params.id
-        res.send({ success: true, books: bookController.removeBook(bookId) })
+        res.send({ success: true, books: await bookController.removeBook(bookId) })
     } catch(e) {
         res.status(500).send({ success: false, message: `Não foi possível remover o livro` })
     }

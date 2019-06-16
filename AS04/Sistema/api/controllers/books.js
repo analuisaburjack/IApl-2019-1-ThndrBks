@@ -32,8 +32,8 @@ function isValid({title, isbn, author, genre}) {
         throw { code: 400, message: `Invalid isbn`}
     if(!author)
         throw { code: 400, message: `Invalid author`}
-    if(!genre || genre !== 'Romance' || genre !==  'Adventure' || genre !==  'Fantasy' || 
-        genre !==  'Thriller' || genre !==  'Mistery')
+    if(!genre || (genre !== 'Romance' && genre !==  'Adventure' && genre !==  'Fantasy' && 
+        genre !==  'Thriller' && genre !==  'Mistery'))
         throw { code: 400, message: `Invalid genre`}
     return true
 }
