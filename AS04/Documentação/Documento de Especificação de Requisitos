@@ -1,0 +1,21 @@
+## Descrição Geral
+
+O projeto será considerado um sucesso se atender a todos os critérios de
+aceitação das entregas, respeitar as restrições e cumprir o cronograma de execução
+e principalmente promover o controle facilitado de uma biblioteca.
+
+## Requisitos Funcionais
+
+**RF001** - O sistema deve permitir que o usuário realize um login
+
+**RF002** - O sistema deve permitir que o usuário cadastre um livro, com os seguintes dados: Título, autor, código ISBN e o gênero (Romance, Aventura, Fantasia, Suspense ou Mistério)
+
+**RF003** - O sistema deve permitir que o usuário altere os dados de um livro cadastrado
+
+**RF004** - O sistema deve permitir que o usuário exclua um livro cadastrado
+
+## Requisitos Não-Funcionais
+
+**RNF001** - Deve ser permitido ao usuário acessar o sistema em pelo menos duas linguagens 
+
+**RNF002** - O sistema deve tratar os erros e exceções, emitindo avisos e mensagens de erro
