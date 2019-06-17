@@ -5,10 +5,10 @@
 #### API
 Disponível no através do endpoint: https://thinderbooks.herokuapp.com/api
 
-Funcionalidades disponíveis:
+Funcionalidades disponíveis: <br />
 
-Consultar lista com todos os livros: (GET) /books
-response: [{
+Consultar lista com todos os livros: (GET) /books <br />
+response: [{ <br />
     _id: String, <br />
     created: Date, <br />
     title: String, <br />
@@ -19,8 +19,8 @@ response: [{
 }]
 
 
-Criar um livro: (POST) /books
-body request: {
+Criar um livro: (POST) /books <br />
+body request: { <br />
     "title": String, <br />
     "isbn": String, <br />
     "author": String, <br />
@@ -29,9 +29,9 @@ body request: {
 }
 
 
-Buscar um livro específico: (GET) /books/:id
+Buscar um livro específico: (GET) /books/:id <br />
 :id corresponde ao parâmetro _id gerado automaticamente pelo mongodb.
-response: {
+response: { <br />
     _id: String, <br />
     created: Date, <br /> 
     title: String, <br />
@@ -41,9 +41,9 @@ response: {
     genre: ['Romance', 'Adventure', 'Fantasy', 'Thriller', 'Mistery'] //Uma dentre as opções <br />
 }
 
-Atualizar um livro: (PUT) /books/:id
-:id corresponde ao parâmetro _id gerado automaticamente pelo mongodb.
-body request: { 
+Atualizar um livro: (PUT) /books/:id <br />
+:id corresponde ao parâmetro _id gerado automaticamente pelo mongodb. <br />
+body request: { <br />
     "title": String, <br />
     "isbn": String, <br />
     "author": String, <br />
