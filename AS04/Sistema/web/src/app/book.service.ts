@@ -14,7 +14,6 @@ export class BookService {
 
   private booksApiUrl = `http://localhost:8080/api/books`
 
-
   getBooks() {
     return this.http.get(this.booksApiUrl)
   }
@@ -24,6 +23,6 @@ export class BookService {
   }
 
   deleteBook() {
-    
+
   }
 }

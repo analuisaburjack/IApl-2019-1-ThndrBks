@@ -1,10 +1,10 @@
-import { Genre } from '../app/genre'
+import { Genre } from './genre';
 
 export interface Book {
-    title: String
-    isbn: String
-    author: String
-    release: Date
-    genre: Genre
-    cover: String
+    title: string;
+    isbn: string;
+    author: string;
+    release: Date;
+    genre: Genre;
+    cover: string;
 }
