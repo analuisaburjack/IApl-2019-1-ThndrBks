@@ -30,15 +30,15 @@ module.exports.removeBook = async function(bookId) {
     return await bookRepository.getAll()
 }
 
-function isValid({ title, isbn, author, genre }) {
-    if (!title)
-        throw { code: 400, message: `Invalid title` }
-    if (!isbn)
-        throw { code: 400, message: `Invalid isbn` }
-    if (!author)
-        throw { code: 400, message: `Invalid author` }
-    if (!genre || genre !== 'Romance' || genre !== 'Adventure' || genre !== 'Fantasy' ||
-        genre !== 'Thriller' || genre !== 'Mistery')
-        throw { code: 400, message: `Invalid genre` }
+function isValid({title, isbn, author, genre}) {
+    if(!title)
+        throw { code: 400, message: `Invalid title`}
+    if(!isbn)
+        throw { code: 400, message: `Invalid isbn`}
+    if(!author)
+        throw { code: 400, message: `Invalid author`}
+    if(!genre || (genre !== 'Romance' && genre !==  'Adventure' && genre !==  'Fantasy' && 
+        genre !==  'Thriller' && genre !==  'Mistery'))
+        throw { code: 400, message: `Invalid genre`}
     return true
 }
