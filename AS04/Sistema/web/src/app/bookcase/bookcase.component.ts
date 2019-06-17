@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Book } from './../book';
-import { BookService } from './../book.service'
+import { BookService } from '../book.service';
+import * as M from 'materialize-css/dist/js/materialize';
 
 @Component({
   selector: 'app-bookcase',
@@ -11,15 +11,28 @@ export class BookcaseComponent implements OnInit {
 
   constructor(private bookService: BookService) { }
 
+  // tslint:disable-next-line:ban-types
+  books: Object = [];
+  modal: any;
+
   ngOnInit() {
-    this.getBooks()
+    this.getBooks();
+    this.modal = document.getElementById('modal1')
+    M.Modal.init(this.modal);
   }
 
-  books: any[]
 
   getBooks(): void {
     this.bookService.getBooks()
-      .subscribe(books => console.log(books))
+      .subscribe(books => this.books = books);
+  }
+
+  deleteBook() {
+
+  }
+
+  saveBook() {
+
   }
 
   getCover(coverUrl) {

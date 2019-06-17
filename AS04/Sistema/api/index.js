@@ -1,7 +1,9 @@
 const express = require('express'),
     server = express(),
     bodyParser = require('body-parser'),
-    mongoose = require('mongoose')
+    mongoose = require('mongoose'),
+    cors = require('cors')
+
 
 var port = process.env.PORT || 8080;
 
@@ -10,9 +12,10 @@ mongoose.connect(url, { useNewUrlParser: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
-  console.log('mongoose running')
+    console.log('mongoose running')
 });
 
+server.use(cors())
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
