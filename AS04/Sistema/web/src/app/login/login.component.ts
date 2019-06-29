@@ -33,8 +33,8 @@ export class LoginComponent implements OnInit {
         this.loginService.setUser(response)
         this.router.navigate(['/bookcase']);
       }, error =>   {
-
-if(error.error.code == 40) {
+        console.log(error)
+        if(error.error.code == 40) {
           M.toast({html: this.labels.userNotFound});
         }      
       });

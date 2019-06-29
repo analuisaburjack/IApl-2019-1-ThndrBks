@@ -20,5 +20,6 @@ server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
 server.use('/api', require('./routes/books'))
+server.use('/api', require('./routes/users'))
 server.listen(port);
 console.log('Port: ' + port);
