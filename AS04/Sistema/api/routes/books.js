@@ -1,23 +1,18 @@
 const express = require('express'),
     router = express.Router(),
-    bookController = require('../controllers/books'),
-    userController = require('../controllers/user')
+    bookController = require('../controllers/books')
 
-router.route('/books/')
+router.route('/books')
     .post(getBooks)
 
-router.route('/books/create')
+router.route('/books')
     .post(createBook)
 
-router.route('/books/update')
+router.route('/books/:id/update/')
     .post(updateBook)
 
-router.route('/books/remove/:id')
+router.route('/books/:id/remove/')
     .post(removeBook)
-
-router.route('/books/remove/:id')
-    .post(removeBook)
-
 
 module.exports = router
 

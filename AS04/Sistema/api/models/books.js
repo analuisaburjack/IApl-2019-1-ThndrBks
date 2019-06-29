@@ -8,7 +8,7 @@ const bookSchema = mongoose.Schema({
     publisher: { type: String, required: true },
     cover: { type: String, required: true },
     release: Date,
-    genre: { type: String, required: true, enum: ['Romance', 'Adventure', 'Fantasy', 'Thriller', 'Mistery'] }
+    genre: { type: String, required: true }
 })
 
 module.exports = mongoose.model('Book', bookSchema)
