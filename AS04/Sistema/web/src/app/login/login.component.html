@@ -1,0 +1,41 @@
+<img class="responsive-img logo" src="./../../assets/Logo.png" alt="Logomarca Thinderbooks">
+
+<div class="container">
+    <div class="row">
+        <div class="col s1"></div>
+        <div class="col s6">
+            <div class="valign-wrapper row login-box">
+                <div class="col card hoverable s12">
+                    <form>
+                        <div class="card-content">
+                            <span class="card-title">Bem vindo(a)</span>
+                            <div class="row">
+                                <div class="input-field col s12" [hidden]="signInForm">
+                                    <label for="email">{{ labels.nameInput }}</label>
+                                    <input type="email" [(ngModel)]="user.name" class="validate" name="email" id="email" />
+                                </div>
+                                <div class="input-field col s12">
+                                    <label for="email">{{ labels.emailInput }}</label>
+                                    <input type="email" [(ngModel)]="user.email" class="validate" name="email" id="email" />
+                                </div>
+                                <div class="input-field col s12">
+                                    <label for="password">{{ labels.passwordInput }}</label>
+                                    <input type="password" [(ngModel)]="user.password" class="validate" name="password" id="password" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-action right-align" [hidden]="!signInForm">
+                            <a (click)="setSignUpForm()">{{ labels.signUpLink }}</a>
+                            <input type="submit" (click)="signIn()" class="btn brown waves-effect waves-light" value="{{labels.signInButton}}">
+                        </div>
+                        <div class="card-action right-align" [hidden]="signInForm">
+                            <a (click)="setSignInForm()">{{ labels.signInLink }}</a>
+                            <input type="submit" (click)="signUp()" class="btn brown waves-effect waves-light" value="{{labels.signUpButton}}">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col s3"></div>
+    </div>
+</div>

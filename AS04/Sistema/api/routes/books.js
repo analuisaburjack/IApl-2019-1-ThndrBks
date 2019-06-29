@@ -1,53 +1,37 @@
 const express = require('express'),
     router = express.Router(),
-    bookController = require('../controllers/books')
-
+    bookController = require('../controllers/books'),
+    userController = require('../controllers/user')
 
 router.route('/books/')
-    .get(getBooks)
+    .post(getBooks)
+
+router.route('/books/create')
     .post(createBook)
 
-router.route('/books/:id')
-    .get(getBook)
-    .put(updateBook)
+router.route('/books/update')
+    .post(updateBook)
 
 router.route('/books/remove/:id')
     .post(removeBook)
+
+router.route('/books/remove/:id')
+    .post(removeBook)
+
+router.route('/login/signup/')
+    .post(createUser)
+
+router.route('/login/signin/')
+    .post(login)
 
 module.exports = router
 
 async function getBooks(req, res) {
     try {
-        // const books = await bookController.getBooks()
-
-        const books = [{
-                title: 'A Lagoa Azul',
-                isbn: '123456-7',
-                genre: 'Adventure',
-                author: 'JK',
-                release: new Date('11-20-1990'),
-                cover: 'http://br.web.img2.acsta.net/c_215_290/pictures/14/03/18/21/05/254594.jpg'
-            },
-            {
-                title: 'Harry Potter',
-                isbn: '123456-7',
-                genre: 'Fantasy',
-                author: 'JK',
-                release: new Date('11-20-1990'),
-                cover: 'https://hpmedia.bloomsbury.com/rep/s/9781408855898_309038.jpeg'
-            }, {
-                title: 'A Lagoa Azul',
-                isbn: '123456-7',
-                genre: 'Adventure',
-                author: 'JK',
-                release: new Date('11-20-1990'),
-                cover: 'http://catalogo.ftd.com.br.s3.amazonaws.com/280x400_aventuras-no-sitio.jpg'
-            }
-        ]
-
+        const user = req.body
+        const books = await bookController.getBooks(user)
         res.status(201).send(books)
 
-        //res.send({ success: true, books: books })
     } catch (e) {
         res.status(500).send({ success: false, message: `Falha ao buscar livros: ${e.message}` })
     }
@@ -55,10 +39,17 @@ async function getBooks(req, res) {
 
 async function createBook(req, res) {
     try {
-        const book = req.body
-        res.status(201).send({ success: true, book: await bookController.createBook(book) })
-    } catch(e) {
-        res.status(500).send({ success: false, message: `Falha ao cadastrar livro: ${e.message}`})
+        const book = req.body.book
+        const user = req.body.currentUser
+
+        const response = await bookController.createBook(book, user)
+        if (response) {
+            res.status(201).send({ success: true, book: await bookController.createBook(book, user) })
+        } else {
+            res.status(500).send({ success: false, message: `Falha ao cadastrar livro: ${e.message}` })
+        }
+    } catch (e) {
+        res.status(500).send({ success: false, message: `Falha ao cadastrar livro: ${e.message}` })
     }
 }
 
@@ -73,9 +64,12 @@ async function getBook(req, res) {
 
 async function updateBook(req, res) {
     try {
+        const id = req.body._id
         const book = req.body
-        res.status(201).send({ success: true, book: await bookController.updateBook(book) })
-    } catch(e) {
+        delete book._id
+        const updatedBook = await bookController.updateBook(id, book)
+        res.status(201).send({ success: true, book: updatedBook })
+    } catch (e) {
         res.status(500).send({ success: false, message: `Não foi possível atualizar o livro` })
     }
 }
@@ -84,7 +78,31 @@ async function removeBook(req, res) {
     try {
         const bookId = req.params.id
         res.send({ success: true, books: await bookController.removeBook(bookId) })
-    } catch(e) {
+    } catch (e) {
         res.status(500).send({ success: false, message: `Não foi possível remover o livro` })
+    }
+}
+
+async function createUser(req, res) {
+    try {
+        const newUser = req.body
+        const createdUser = await userController.createUser(newUser)
+        res.status(201).send(createdUser)
+    } catch (e) {
+        if (e.code == 10) {
+            res.status(400).send(e)
+        } else res.status(500)
+    }
+}
+
+async function login(req, res) {
+    try {
+        const user = req.body
+        const existentUser = await userController.getUser(user)
+        res.status(201).send(existentUser)
+    } catch (e) {
+        if (e.code == 40) {
+            res.status(400).send({ code: 40, message: `Credentials error` })
+        } else res.status(500)
     }
 }

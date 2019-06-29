@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs'
-import { BOOKS } from './books_mock'
-import { Book } from './book'
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +11,24 @@ export class BookService {
 
   private booksApiUrl = `http://localhost:8080/api/books`
 
-  getBooks() {
-    return this.http.get(this.booksApiUrl)
+  // getBooks() {
+  //   return this.http.get(this.booksApiUrl);
+  // }
+
+  saveBook(book, currentUser) {
+    const data = {book, currentUser}
+    return this.http.post(`${this.booksApiUrl}/create`, data);
   }
 
-  saveBook() {
-
+  getBooks(user) {
+    return this.http.post(this.booksApiUrl, user);
   }
 
-  deleteBook() {
+  updateBook(book) {
+    return this.http.post(`${this.booksApiUrl}/update`, book);
+  }
 
+  removeBook(book) {
+    return this.http.post(`${this.booksApiUrl}/remove/${book._id}`, book);
   }
 }

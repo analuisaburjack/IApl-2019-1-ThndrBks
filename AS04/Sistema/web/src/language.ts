@@ -1,29 +1,63 @@
-export class Language {
+import {Book} from './app/book';
+
+export const LABELS: any = {
     pt: {
-        newBookButton: "Novo Livro",
-        newBookTitle: "Titulo",
+        newBookButton: 'Novo Livro',
+        newBookTitle: "Novo Livro",
         title: "Titulo",
-        isbn: "isbn",
+        isbn: "ISBN",
         author: "Autor",
         release: "Lançamento",
         genre: "Gênero",
         cover: "Capa",
         create: "Cadastrar",
         editBook: "Editar Livro",
-        saveChanges: "Atualizar"
-    }
+        saveChanges: "Atualizar",
+        signInButton: "Login",
+        signUpButton: "Criar",
+        signInLink: "Já possuo uma conta",
+        signUpLink: "Não possuo uma conta",
+        emailInput: "E-mail",
+        passwordInput: "Senha",
+        nameInput: "Nome",
+        errorExistentUser: "Este e-mail já está vinculado a uma conta existente",
+        userSuccessfullyCreated: "Usuário(a) cadastrado com sucesso. Efetue login.",
+        userNotFound: "E-mail e senha não correspondem.",
+        saveBookFail: "Não foi possível registrar este livro",
+        saveBookSuccess: "Livro cadastrado com sucesso!",
+        updateBookFail: "Falha ao editar livro!",
+        updateBookSuccess: "Feito!",
+        removeBookFail: "Falha!",
+        removeBookSuccess: "Feito!"
+    },
 
     en: {
         newBookButton: "New Book",
         newBookTitle: "Create Book",
         title: "Title",
-        isbn: "isbn",
+        isbn: "ISBN",
         author: "Author",
         release: "Release",
         genre: "Genre",
         cover: "Cover",
         create: "Create",
         editBook: "Edit book",
-        saveChanges: "Update"
+        saveChanges: "Update",
+        signInButton: "Login",
+        signUpButton: "Criar",
+        signInLink: "Already have an account",
+        signUpLink: "Don't have an account",
+        emailInput: "E-mail",
+        passwordInput: "Password",
+        nameInput: "Name",
+        errorExistentUser: "This user already exists",
+        userSuccessfullyCreated: "Success!",
+        userNotFound: "Wrong e-mail or password",
+        saveBookFail: "Coudn't save this book",
+        saveBookSuccess: "Success!",
+        updateBookFail: "Fail!",
+        updateBookSuccess: "Success!",
+        removeBookFail: "Fail!",
+        removeBookSuccess: "Success!"
     }
-}
+};

@@ -1,7 +1,8 @@
 <img class="responsive-img logo" src="./../../assets/Logo.png" alt="Logomarca Thinderbooks">
 
+<a class="waves-effect waves-light btn brown modal-trigger" href="#newBookModal">{{ labels.newBookButton }}</a>
+<p>olá {{currentUser.name}}</p>
 <div class="row">
-    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
 
     <div class="col s3" *ngFor="let book of books">
         <div class="card">
@@ -12,7 +13,8 @@
             <div class="general">
                 <h1>{{ book.title }}</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a volutpat mauris, at molestie lacus. Nam vestibulum sodales odio ut pulvinar.</p>
-                <span class="more"><i class="material-icons">favorite_border</i></span>
+                <span (click)="setupEditBook(book)" id="edit" class="more modal-trigger left-align" href="#editBookModal"><i class="material-icons">border_color</i></span>
+                <span (click)="removeBook(book)" class="more modal-trigger right-align"><i class="material-icons">delete</i></span>
             </div>
         </div>
     </div>
@@ -23,53 +25,95 @@
 <!-- Modal Trigger -->
 
 <!-- Modal Structure -->
-<div id="modal1" class="modal">
+<div id="newBookModal" class="modal">
     <div class="modal-content">
-        <h4>Modal Header</h4>
+        <h4>{{ labels.newBookTitle }}</h4>
         <div class="row">
             <form class="col s12">
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="title" type="text" class="validate">
-                        <label for="title">Título</label>
+                        <input id="newBookTitle" name="newBookTitle" [(ngModel)]="newBook.title" type="text" class="validate">
+                        <label for="newBookTitle">{{ labels.title }}</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                        <input id="isbn" type="text" class="validate">
-                        <label for="isbn">ISBN</label>
+                        <input id="newBookIsbn" name="newBookIsbn" [(ngModel)]="newBook.isbn" type="text" class="validate">
+                        <label for="newBookIsbn">{{ labels.isbn }}</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="author" type="text" class="validate">
-                        <label for="author">Autor(a)</label>
+                        <input id="newBookAuthor" name="newBookAuthor" [(ngModel)]="newBook.author" type="text" class="validate">
+                        <label for="newBookAuthor">{{ labels.author }}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="newBookRelease" name="newBookRelease" type="date" [(ngModel)]="newBook.release" class="validate">
+                        <label for="newBookRelease">{{ labels.release }}</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="newBookGenre" name="newBookGenre" type="text" [(ngModel)]="newBook.genre" class="validate">
+                        <label for="newBookGenre">{{ labels.genre }}</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="password" type="password" class="validate">
-                        <label for="password">Password</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input id="email" type="email" class="validate">
-                        <label for="email">Email</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12">
-                        This is an inline input field:
-                        <div class="input-field inline">
-                            <input id="email_inline" type="email" class="validate">
-                            <label for="email_inline">Email</label>
-                            <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
-                        </div>
+                        <input id="newBookCover" name="newBookCover" type="text" [(ngModel)]="newBook.cover" class="validate">
+                        <label for="newBookCover">{{ labels.cover }}</label>
                     </div>
                 </div>
             </form>
         </div>
     </div>
     <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+        <a class="waves-effect brown waves-light btn" (click)="saveBook()">{{ labels.create }}</a>
     </div>
 </div>
+
+<div id="editBookModal" class="modal">
+    <div class="modal-content">
+        <h4>{{ labels.editBook }}</h4>
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="editedBookTitle" name="editedBookTitle" [(ngModel)]="editedBook.title" type="text" class="validate">
+                        <label for="editedBookTitle">{{ labels.title }}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="editedBookIsbn" name="editedBookIsbn" [(ngModel)]="editedBook.isbn" type="text" class="validate">
+                        <label for="editedBookIsbn">{{ labels.isbn }}</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="editedBookAuthor" name="editedBookAuthor" [(ngModel)]="editedBook.author" type="text" class="validate">
+                        <label for="editedBookAuthor">{{ labels.author }}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="editedBookRelease" name="editedBookRelease" type="date" [(ngModel)]="editedBook.release" class="validate">
+                        <label for="editedBookRelease">{{ labels.release }}</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="editedBookGenre" name="editedBookGenre" type="text" [(ngModel)]="editedBook.genre" class="validate">
+                        <label for="editedBookGenre">{{ labels.genre }}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="editedBookCover" name="editedBookCover" type="text" [(ngModel)]="editedBook.cover" class="validate">
+                        <label for="editedBookCover">{{ labels.genre }}</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a class="waves-effect brown waves-light btn" (click)="updateBook()">{{ labels.saveChanges }}</a>
+    </div>
+</div>
+
+<a class="waves-effect waves-light brown btn-small" (click)="setPt()">Português</a>
+<a class="waves-effect waves-light brown btn-small" (click)="setEn()">Inglês</a>
