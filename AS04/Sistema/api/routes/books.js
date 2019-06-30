@@ -3,7 +3,7 @@ const express = require('express'),
     bookController = require('../controllers/books')
 
 router.route('/books')
-    .post(getBooks)
+    .get(getBooks)
 
 router.route('/books')
     .post(createBook)
@@ -18,8 +18,7 @@ module.exports = router
 
 async function getBooks(req, res) {
     try {
-        const user = req.body
-        const books = await bookController.getBooks(user)
+        const books = await bookController.getBooks()
         res.status(201).send(books)
 
     } catch (e) {

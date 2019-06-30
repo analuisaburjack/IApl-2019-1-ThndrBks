@@ -33,8 +33,9 @@ export class LoginComponent implements OnInit {
         this.loginService.setUser(response)
         this.router.navigate(['/bookcase']);
       }, error =>   {
+        debugger;
         console.log(error)
-        if(error.error.code == 40) {
+        if(error.status == 404) {
           M.toast({html: this.labels.userNotFound});
         }      
       });
@@ -43,7 +44,6 @@ export class LoginComponent implements OnInit {
   signUp() {
     this.loginService.signUp(this.user)
       .subscribe(response => {
-        console.log(response)
         M.toast({html: this.labels.userSuccessfullyCreated})
         
         this.user = {
@@ -56,9 +56,7 @@ export class LoginComponent implements OnInit {
 
       }, error =>   {
         console.log(error)
-        if(error.error.code == 10) {
-          M.toast({html: this.labels.errorExistentUser});
-        }
+          M.toast({html: error.error.message || this.labels.errorExistentUser});
       })
   }
 

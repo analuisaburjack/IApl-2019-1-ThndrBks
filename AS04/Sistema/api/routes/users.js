@@ -17,10 +17,8 @@ async function createUser(req, res) {
         const newUser = req.body
         const createdUser = await userController.createUser(newUser)
         res.status(201).send(createdUser)
-    } catch (e) {
-        if (e.code == 10) {
-            res.status(400).send(e)
-        } else res.status(500)
+    } catch (e) {      
+        res.status(e.code || 500).send({ success: false, message: e.message || `Internal Server Error`})
     }
 }
 
@@ -30,8 +28,8 @@ async function login(req, res) {
         const existentUser = await userController.getUser(user)
         res.status(201).send(existentUser)
     } catch (e) {
-        if (e.code == 40) {
-            res.status(400).send({ code: 40, message: `Credentials error` })
-        } else res.status(500)
+        if (e.code) {
+            res.status(e.code || 500).send({ success: false, message: `Credentials error` || `Internal Server Error` })
+        } else res.status(500).send({ success: false, message: `Internal Server Error` })
     }
 }

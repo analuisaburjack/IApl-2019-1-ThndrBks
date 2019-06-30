@@ -2,41 +2,32 @@ const bookRepository = require('../repositories/books');
 const Book = require('../models/books')
 const Library = require('../models/libraries')
 
-module.exports.getBooks = async function(user) {
+module.exports.getBooks = async function() {
 
-    const library = await Library.findById(user.library)
-
-    const books = await bookRepository.getAllByUser(library.books)
+    const books = await bookRepository.getAll()
     return books
 }
+
 module.exports.getBook = async function(bookId) {
     return await bookRepository.getById(bookId)
 }
 
 module.exports.createBook = async function(book, user) {
     book.release = new Date(book.release)
+    isValid(book)
+    const existentBook = await Book.findOne({ isbn: book.isbn })
+    if(!existentBook)
+        existentBook = await bookRepository.createOne(book)
 
-    try {
-        const existentBook = await Book.findOne({ isbn: book.isbn })
-        if (existentBook) {
-            const library = await Library.findById(user.library)
-            library.books.push(existentBook._id)
-            await library.save()
-            return true
-        } else if (isValid(book)) {
-            const savedBook = await bookRepository.createOne(book)
-            const userLibrary = await Library.findById(user.library)
-            userLibrary.books.push(savedBook._id)
-            await userLibrary.save()
-            return true
-        } else {
-            return false
-        }
-    } catch (error) {
-        console.log(error)
+    if(!existentBook)
+        throw { code: 500, success: false, message: `Fail saving book`}
+    
+    if (user) {
+        const userLibrary = await Library.findById(user.library)
+        userLibrary.books.push(existentBook._id)
+        await userLibrary.save()
     }
-
-
+    return existentBook;
 }
 
 module.exports.updateBook = async function(id, book) {

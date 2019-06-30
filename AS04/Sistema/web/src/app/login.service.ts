@@ -8,7 +8,7 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  private usersApiUrl = `http://localhost:8080/api/login`
+  private usersApiUrl = `http://localhost:8080/api/users`
   user: any;
 
   signIn(user) {
