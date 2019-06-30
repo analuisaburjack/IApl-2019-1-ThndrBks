@@ -1,0 +1,78 @@
+<div class="row">
+    <div class="col m3" *ngFor="let film of films">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">{{ film.title }}</span>
+                <p>{{ labels.release }} {{ film.year}}</p>
+                <p>{{ labels.genre }} {{ film.genre }}</p>
+            </div>
+            <div class="card-action">
+                <a class="btn-floating waves-effect waves-light red"><i class="material-icons">restore_from_trash</i></a>
+                <a class="btn-floating waves-effect waves-light red"><i class="material-icons">edit</i></a>
+                <a data-target="viewFilmModal" (click)="viewFilm(film)" class="modal-trigger btn-floating waves-effect waves-light red"><i class="material-icons">remove_red_eye</i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s4">
+        <ul class="collection with-header">
+            <li class="collection-header">
+                <h4>{{labels.directorTitle}}</h4>
+            </li>
+            <a *ngFor="let director of directors" data-target="viewPersonModal" (click)="setViewPerson(director)" class="modal-trigger collection-item">{{director.name}}</a>
+
+        </ul>
+    </div>
+    <div class="col s4">
+        <ul class="collection with-header">
+            <li class="collection-header">
+                <h4>{{labels.actorTitle}}</h4>
+            </li>
+            <a *ngFor="let actor of actors" data-target="viewPersonModal" (click)="setViewPerson(actor)" class="modal-trigger collection-item">{{actor.name}}</a>
+
+        </ul>
+    </div>
+    <div class="col s4">
+        <ul class="collection with-header">
+            <li class="collection-header">
+                <h4>{{labels.actressTitle}}</h4>
+            </li>
+            <a *ngFor="let actress of actresses" data-target="viewPersonModal" (click)="setViewPerson(actress)" class="modal-trigger collection-item">{{actress.name}}</a>
+        </ul>
+    </div>
+</div>
+
+
+
+<div id="viewFilmModal" class="modal">
+    <div *ngIf="currentFilm">
+        <div class="modal-content">
+            <h4>{{ currentFilm.title }}</h4>
+            <p>{{ labels.release }} {{ currentFilm.year}}</p>
+            <p>{{ labels.genre }} {{ currentFilm.genre }}</p>
+            <p>{{ labels.director }} {{ currentFilm.director.name }}</p>
+            <p>{{ labels.actor }} {{ currentFilm.actor.name }}</p>
+            <p>{{ labels.actress }} {{ currentFilm.actress.name }}</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+        </div>
+    </div>
+</div>
+
+<div id="viewPersonModal" class="modal">
+    <div *ngIf="personView">
+        <div class="modal-content">
+            <h4>{{ personView.name }} {{ personView.name }}</h4>
+            <p>{{ labels.personId }} {{ personView.id }}</p>
+            <p>{{ labels.personGender }} {{ personView.gender }}</p>
+            <p>{{ labels.personBirth }} {{ personView.birth }}</p>
+            <p>{{ labels.personJob }} {{ personView.job }}</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+        </div>
+    </div>
+</div>

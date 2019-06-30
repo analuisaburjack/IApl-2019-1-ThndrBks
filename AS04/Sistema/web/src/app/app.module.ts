@@ -7,13 +7,15 @@ import { BookcaseComponent } from './bookcase/bookcase.component';
 import { BookComponent } from './book/book.component';
 import { FormsModule }   from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import { FilmsComponent } from './films/films.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BookcaseComponent,
     BookComponent,
-    LoginComponent
+    LoginComponent,
+    FilmsComponent
   ],
   imports: [
     BrowserModule,
