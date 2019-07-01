@@ -3,6 +3,7 @@ import { BookService } from '../book.service';
 import * as M from 'materialize-css/dist/js/materialize';
 import { LABELS } from './../../language';
 import { LoginService } from '../login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bookcase',
@@ -11,7 +12,7 @@ import { LoginService } from '../login.service';
 })
 export class BookcaseComponent implements OnInit {
 
-  constructor(private bookService: BookService, private loginService: LoginService) { }
+  constructor(private bookService: BookService, private loginService: LoginService, private router: Router) { }
 
   // tslint:disable-next-line:ban-types
   books: Object = [];
@@ -35,23 +36,30 @@ export class BookcaseComponent implements OnInit {
     cover: ''
   };
 
-  currentUser: any;
+  currentUser: any = {  };
 
   ngOnInit() {
+    debugger
+    let user = this.loginService.getUser()
+    if(!user) {
+      this.router.navigate([''])
+      return
+    }
+    this.currentUser = user;
     this.getBooks();
     this.newBookModal = document.getElementById('newBookModal');
     this.editBookModal = document.getElementById('editBookModal');
     M.Modal.init(this.newBookModal);
     M.Modal.init(this.editBookModal);
 
-    this.currentUser = this.loginService.getUser()
     this.getBooks()
   }
 
   getBooks(): void {
     this.bookService.getBooks(this.loginService.getUser())
-      .subscribe(books => {
-        this.books = books;
+      .subscribe(response => {
+        const res: any = response
+        this.books = res.books;
         console.log(this.books);
       }, error => M.toast({html: 'Erro ao carregar livros'}));
   }
@@ -81,19 +89,24 @@ export class BookcaseComponent implements OnInit {
   }
 
   removeBook(book) {
-    this.bookService.removeBook(book)
+    debugger
+    this.bookService.removeBook(this.currentUser, book)
       .subscribe(response => {
         M.toast({html: this.labels.removeBookSuccess});
+        this.getBooks()
       }, error =>   {
         M.toast({html: this.labels.removeBookFail});
       });
   }
+
   getCover(coverUrl) {
     return `url('${coverUrl}')`;
   }
+
   setPt() {
     this.labels = LABELS.pt;
   }
+
   setEn() {
     this.labels = LABELS.en;
   }

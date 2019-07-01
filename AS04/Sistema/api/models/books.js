@@ -5,8 +5,7 @@ const bookSchema = mongoose.Schema({
     title: { type: String, required: true },
     isbn: { type: String, required: true },
     author: { type: String, required: true },
-    publisher: { type: String, required: true },
-    cover: { type: String, required: true },
+    cover: { type: String, required: false },
     release: Date,
     genre: { type: String, required: true }
 })

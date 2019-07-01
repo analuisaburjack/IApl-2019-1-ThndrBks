@@ -149,3 +149,7 @@
 #edit {
     margin-right: 30px
 }
+
+i {
+    cursor: pointer;
+}

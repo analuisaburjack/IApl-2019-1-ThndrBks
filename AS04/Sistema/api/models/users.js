@@ -4,8 +4,7 @@ const userSchema = mongoose.Schema({
     created: { type: Date, default: Date.now() },
     name: { type: String, required: true },
     email: { type: String, required: true },
-    password: { type: String, required: true },
-    library: { type: mongoose.Schema.Types.ObjectId }
+    password: { type: String, required: true }
 })
 
 userSchema.index({ 'email': 1 }, { unique: true, name: 'emailUnique' });

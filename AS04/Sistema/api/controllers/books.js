@@ -1,6 +1,6 @@
 const bookRepository = require('../repositories/books');
 const Book = require('../models/books')
-const Library = require('../models/libraries')
+const librariesRepository = require('../repositories/libraries')
 
 module.exports.getBooks = async function() {
 
@@ -23,7 +23,8 @@ module.exports.createBook = async function(book, user) {
         throw { code: 500, success: false, message: `Fail saving book`}
     
     if (user) {
-        const userLibrary = await Library.findById(user.library)
+        const userLibrary = await librariesRepository.getOne({ userId: user._id })
+        await librariesRepository.addBook(user._id, existentBook._id)
         userLibrary.books.push(existentBook._id)
         await userLibrary.save()
     }
@@ -31,9 +32,8 @@ module.exports.createBook = async function(book, user) {
 }
 
 module.exports.updateBook = async function(id, book) {
-    if (isValid(book)) {
-        return await bookRepository.updateOne(id, book)
-    }
+    isValid(book)
+    return await bookRepository.updateOne(id, book)
 }
 
 module.exports.removeBook = async function(bookId) {
@@ -48,5 +48,7 @@ function isValid({ title, isbn, author, genre }) {
         throw { code: 400, message: `Invalid isbn` }
     if (!author)
         throw { code: 400, message: `Invalid author` }
+    if (!genre)
+        throw { code: 400, message: `Invalid genre` }
     return true
 }

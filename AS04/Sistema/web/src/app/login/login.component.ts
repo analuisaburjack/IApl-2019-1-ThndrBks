@@ -28,10 +28,10 @@ export class LoginComponent implements OnInit {
   
   signIn() {
     this.loginService.signIn(this.user)
-      .subscribe(response => {
-        console.log(response)
-        this.loginService.setUser(response)
-        this.router.navigate(['/bookcase']);
+      .subscribe(res => {
+        let response: any = res
+        this.loginService.setUser(response.user)
+        this.router.navigate(['/library']);
       }, error =>   {
         debugger;
         console.log(error)
