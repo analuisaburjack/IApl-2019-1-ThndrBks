@@ -20,5 +20,12 @@ export const LABELS: any = {
         director: "Director:",
         actor: "Actor:",
         actress: "Actress:"
+        directorTitle: "Director",
+        actorTitle: "Actor",
+        actressTitle: "Actress",
+        personId: "ID:",
+        personGender: "Gender:",
+        personJob: "Profession:",
+        personBirth: "Date of Birth:",
     }
 };
