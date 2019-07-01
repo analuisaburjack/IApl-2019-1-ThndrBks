@@ -13,8 +13,10 @@
             <div class="general">
                 <h1>{{ book.title }}</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a volutpat mauris, at molestie lacus. Nam vestibulum sodales odio ut pulvinar.</p>
-                <span (click)="setupEditBook(book)" id="edit" class="more modal-trigger left-align" href="#editBookModal"><i class="material-icons">border_color</i></span>
-                <span (click)="removeBook(book)" class="more modal-trigger right-align"><i class="material-icons">delete</i></span>
+                <section>
+                    <span (click)="setupEditBook(book)" id="edit" class="more modal-trigger left-align" href="#editBookModal"><i class="material-icons">border_color</i></span>
+                    <span (click)="removeBook(book)" class="more right-align"><i class="material-icons">delete</i></span>
+                </section>
             </div>
         </div>
     </div>

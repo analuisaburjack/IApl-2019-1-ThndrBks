@@ -16,7 +16,7 @@ async function createUser(req, res) {
     try {
         const newUser = req.body
         const createdUser = await userController.createUser(newUser)
-        res.status(201).send(createdUser)
+        res.status(201).send({ success: true, user: createdUser})
     } catch (e) {      
         res.status(e.code || 500).send({ success: false, message: e.message || `Internal Server Error`})
     }
@@ -26,10 +26,8 @@ async function login(req, res) {
     try {
         const user = req.body
         const existentUser = await userController.getUser(user)
-        res.status(201).send(existentUser)
+        res.status(201).send({ sucess: true, user: existentUser})
     } catch (e) {
-        if (e.code) {
-            res.status(e.code || 500).send({ success: false, message: `Credentials error` || `Internal Server Error` })
-        } else res.status(500).send({ success: false, message: `Internal Server Error` })
+        res.status(e.code || 500).send({ success: false, message: `Credentials error` || `Internal Server Error` })
     }
 }
