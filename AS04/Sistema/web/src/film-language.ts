@@ -33,7 +33,7 @@ export const LABELS: any = {
         genre: "Genre:",
         director: "Director:",
         actor: "Actor:",
-        actress: "Actress:"
+        actress: "Actress:",
         directorTitle: "Director",
         actorTitle: "Actor",
         actressTitle: "Actress",
