@@ -12,6 +12,20 @@ export const LABELS: any = {
         personGender: "Gênero:",
         personJob: "Profissão:",
         personBirth: "Nascimento:",
+        titleForm: "Título",
+        genreForm: "Gênero",
+        directorIdForm: "ID do diretor",
+        actorIdForm: "ID do ator",
+        actressIdForm: "ID da atriz",
+        releaseForm: "Lançamento",
+        closeModal: "Fechar",
+        updateModal: "Atualizar",
+        deleteInfo: "Confirma a exclusão de",
+        deleteModal: "Excluir",
+        done: "Deu certo",
+        error: "Algo deu errado",
+        newModal: "Cadastrar",
+        idForm: "ID"
     },
 
     en: {

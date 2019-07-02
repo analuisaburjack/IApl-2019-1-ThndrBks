@@ -18,4 +18,18 @@ export class FilmService {
     console.log("Iniciando requisição");
     return this.http.get(`${this.filmsApiUrl}/persons`);
   }
+
+  updateFilm(film) {
+    console.log(film)
+    return this.http.put(`${this.filmsApiUrl}/film/{id}?id=${film.id}&title=${film.title}&genre=${film.genre}&idActor=${film.idActor}&idActress=${film.idActress}&idDirector=${film.idDirector}&year=${film.year}`, {});
+  }
+
+  deleteFilm(film) {
+    return this.http.delete(`${this.filmsApiUrl}/film/{id}?id=${film.id}`, {});
+  }
+
+  addFilm(film) {
+    console.log(film)
+    return this.http.post(`${this.filmsApiUrl}/film/?id=${film.id}&title=${film.title}&genre=${film.genre}&idActor=${film.idActor}&idActress=${film.idActress}&idDirector=${film.idDirector}&year=${film.year}`, {});
+  }
 }

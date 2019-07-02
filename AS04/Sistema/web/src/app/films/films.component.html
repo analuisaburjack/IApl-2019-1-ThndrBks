@@ -1,3 +1,12 @@
+<a class="waves-effect waves-light brown btn-small" (click)="setPt()">Português</a>
+<a class="waves-effect waves-light brown btn-small" (click)="setEn()">Inglês</a>
+
+<div class="row">
+    <div class="col m3">
+        <h1>Novo livro <a data-target="newFilmModal" class="modal-trigger btn-floating btn-small waves-effect waves-light red"><i class="material-icons">add</i></a></h1>
+    </div>
+</div>
+
 <div class="row">
     <div class="col m3" *ngFor="let film of films">
         <div class="card">
@@ -7,8 +16,8 @@
                 <p>{{ labels.genre }} {{ film.genre }}</p>
             </div>
             <div class="card-action">
-                <a class="btn-floating waves-effect waves-light red"><i class="material-icons">restore_from_trash</i></a>
-                <a class="btn-floating waves-effect waves-light red"><i class="material-icons">edit</i></a>
+                <a data-target="deleteFilmModal" (click)="setDeletableFilm(film)" class="modal-trigger btn-floating waves-effect waves-light red"><i class="material-icons">restore_from_trash</i></a>
+                <a data-target="editFilmModal" (click)="editFilm(film)" class="modal-trigger btn-floating waves-effect waves-light red"><i class="material-icons">edit</i></a>
                 <a data-target="viewFilmModal" (click)="viewFilm(film)" class="modal-trigger btn-floating waves-effect waves-light red"><i class="material-icons">remove_red_eye</i></a>
             </div>
         </div>
@@ -62,6 +71,51 @@
     </div>
 </div>
 
+
+
+<div id="editFilmModal" class="modal">
+    <div *ngIf="editedFilm">
+        <div class="modal-content">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input [(ngModel)]="editedFilm.title" name="titleForm" id="titleForm" type="text" class="validate">
+                        <label for="titleForm">{{labels.titleForm}}</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input [(ngModel)]="editedFilm.genre" name="genreForm" id="genreForm" type="text" class="validate">
+                        <label for="genreForm">{{labels.genreForm}}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input [(ngModel)]="editedFilm.idDirector" name="directorIdForm" id="directorIdForm" type="text" class="validate">
+                        <label for="directorIdForm">{{labels.directorIdForm}}</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input [(ngModel)]="editedFilm.idActor" name="actorIdForm" id="actorIdForm" type="text" class="validate">
+                        <label for="actorIdForm">{{labels.actorIdForm}}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input [(ngModel)]="editedFilm.idActress" name="actressIdForm" id="actressIdForm" type="text" class="validate">
+                        <label for="directorIdForm">{{labels.actressIdForm}}</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input [(ngModel)]="editedFilm.year" name="releaseForm" id="releaseForm" type="text" class="validate">
+                        <label for="releaseForm">{{labels.releaseForm}}</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-close waves-effect waves-green btn-flat">{{labels.closeModal}}</a>
+            <a (click)="updateFilm()" class="waves-effect waves-green btn-flat">{{labels.updateModal}}</a>
+        </div>
+    </div>
+</div>
+
 <div id="viewPersonModal" class="modal">
     <div *ngIf="personView">
         <div class="modal-content">
@@ -73,6 +127,61 @@
         </div>
         <div class="modal-footer">
             <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+        </div>
+    </div>
+</div>
+
+<div id="deleteFilmModal" class="modal">
+    <div *ngIf="deletableFilm">
+        <div class="modal-content">
+            <h4>{{labels.deleteInfo}} "{{ deletableFilm.title }}?</h4>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-close waves-effect waves-green btn-flat">{{labels.closeModal}}</a>
+            <a (click)="deleteFilm()" class="waves-effect waves-green btn-flat">{{labels.deleteModal}}</a>
+        </div>
+    </div>
+</div>
+
+<div id="newFilmModal" class="modal">
+    <div>
+        <div class="modal-content">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input [(ngModel)]="newFilm.title" name="titleForm" id="titleForm" type="text" class="validate">
+                        <label for="titleForm">{{labels.titleForm}}</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input [(ngModel)]="newFilm.genre" name="genreForm" id="genreForm" type="text" class="validate">
+                        <label for="genreForm">{{labels.genreForm}}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input [(ngModel)]="newFilm.idDirector" name="directorIdForm" id="directorIdForm" type="text" class="validate">
+                        <label for="directorIdForm">{{labels.directorIdForm}}</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input [(ngModel)]="newFilm.idActor" name="actorIdForm" id="actorIdForm" type="text" class="validate">
+                        <label for="actorIdForm">{{labels.actorIdForm}}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input [(ngModel)]="newFilm.idActress" name="actressIdForm" id="actressIdForm" type="text" class="validate">
+                        <label for="directorIdForm">{{labels.actressIdForm}}</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input [(ngModel)]="newFilm.year" name="releaseForm" id="releaseForm" type="text" class="validate">
+                        <label for="releaseForm">{{labels.releaseForm}}</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-close waves-effect waves-green btn-flat">{{labels.closeModal}}</a>
+            <a (click)="addNewFilm()" class="waves-effect waves-green btn-flat">{{labels.newModal}}</a>
         </div>
     </div>
 </div>
